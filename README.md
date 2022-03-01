@@ -1,7 +1,7 @@
 # SpatieTagsNovaFilter
 
 This package allows you to filter resources by tags.
-(using the awesome [Spatie/laravel-tags](https://github.com/spatie/laravel-tags) and [Selectize.js](https://github.com/selectize/selectize.js) )
+(using the awesome [Spatie/laravel-tags](https://github.com/spatie/laravel-tags) and [Vue-MultiSelect](https://github.com/shentao/vue-multiselect) )
 
 ## Installation
 
