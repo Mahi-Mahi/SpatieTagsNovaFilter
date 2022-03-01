@@ -4,7 +4,6 @@ namespace Mahi\SpatieTagsNovaFilter;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
-use Spatie\Tags\Tag;
 
 class SpatieTagsNovaFilter extends Filter
 {
@@ -31,6 +30,7 @@ class SpatieTagsNovaFilter extends Filter
             });
             $query->withAllTags($tags);
         }
+
         return $query;
     }
 

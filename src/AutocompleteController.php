@@ -14,13 +14,15 @@ class AutocompleteController
     public function tags(Request $request)
     {
         $tags = [];
-        if ($request->get('q'))
+        if ($request->get('q')) {
             $tags = Tag::containing($request->get('q'))
                 ->get()
                 ->map(function ($tag) {
                     return ['value' => $tag->id, 'name' => $tag->name];
                 })
                 ->toArray();
+        }
+
         return $tags;
     }
 }
