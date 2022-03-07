@@ -14,6 +14,13 @@ class SpatieTagsNovaFilter extends Filter
      */
     public $component = 'spatie-tags-nova-filter';
 
+
+    public function label($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
     /**
      * Apply the filter to the given query.
      *
