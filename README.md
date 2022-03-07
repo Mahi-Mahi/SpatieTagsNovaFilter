@@ -31,7 +31,7 @@ class MyResource extends Resource
     public function filters(Request $request)
     {
         return [
-            new SpatieTagsNovaFilter
+            (new SpatieTagsNovaFilter)->label('Tags')
         ];
     }
 }
