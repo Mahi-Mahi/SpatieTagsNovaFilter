@@ -24,10 +24,12 @@
                 @select="select"
                 label="name"
                 open-direction="bottom"
-                placeholder="Pick some"
+                :placeholder="placeholder"
+                :noOptions="noOptions"
                 track-by="name"
                 v-model="value"
             ></multiselect>
+            {{ meta }}
         </div>
     </div>
 </template>
@@ -47,6 +49,18 @@ export default {
         },
     },
     data() {
+
+        /*
+        placeholder: {
+                    type: String,
+                    default: "Pick some",
+                },
+                noOptions: {
+                    type: String,
+                    default: "No options",
+                },
+                */
+
         return {
             isLoading: false
         }
@@ -74,6 +88,11 @@ export default {
         filter() {
             return this.$store.getters[`${this.resourceName}/getFilter`](
                 this.filterKey
+            )
+        },
+        meta() {
+            return this.$store.getters[`${this.resourceName}/getFilter`](
+                this
             )
         },
         value() {
