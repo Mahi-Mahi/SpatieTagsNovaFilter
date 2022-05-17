@@ -15,7 +15,10 @@ class AutocompleteController
     {
         $tags = [];
         if ($request->get('q')) {
-            $tags = Tag::containing($request->get('q'))
+
+            $tagModel = config('tags.tag_model', Tag::class); //https://github.com/spatie/laravel-tags/blob/cd2ee039cac108761e1e92558046a6428f052199/src/HasTags.php#L18
+
+            $tags = $tagModel::containing($request->get('q'))
                 ->get()
                 ->map(function ($tag) {
                     return ['value' => $tag->id, 'name' => $tag->name];
