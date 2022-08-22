@@ -23,7 +23,7 @@ class AutocompleteController
                 $query = $query->where('type', $request->get('tag_type'));
             $tags = $query->get()
                 ->map(function ($tag) {
-                    return ['value' => $tag->id, 'name' => $tag->name];
+                    return ['value' => $tag->id, 'name' => $tag->name . ($tag->type ? ' (' . $tag->type . ')' : '')];
                 })
                 ->toArray();
         }
