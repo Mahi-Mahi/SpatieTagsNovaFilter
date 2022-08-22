@@ -14,6 +14,15 @@ class SpatieTagsNovaFilter extends Filter
      */
     public $component = 'spatie-tags-nova-filter';
 
+
+    public function __construct($tag_type = null, $withAnyTags = true)
+    {
+        $this->withMeta([
+            "tag_type" => $tag_type,
+            "withAnyTags" => $withAnyTags,
+        ]);
+    }
+
     public function label($name)
     {
         $this->name = $name;
@@ -35,9 +44,11 @@ class SpatieTagsNovaFilter extends Filter
             $tags = collect($value)->map(function ($tag) {
                 return $tag['name'];
             });
-            $query->withAllTags($tags);
+            if ($this->meta['withAnyTags'])
+                $query->withAnyTags($tags, $this->meta['tag_type']);
+            else
+                $query->withAllTags($tags, $this->meta['tag_type']);
         }
-
         return $query;
     }
 

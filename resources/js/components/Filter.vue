@@ -3,33 +3,14 @@
         <h3 class="p-3 text-sm tracking-wide uppercase text-80 bg-30">{{ filter.name }}</h3>
 
         <div class="p-2">
-            <multiselect
-                :clear-on-select="true"
-                :close-on-select="true"
-                :dusk="filter.name + '-filter-select'"
-                :internal-search="false"
-                :limit-text="limitText"
-                :limit="3"
-                :loading="isLoading"
-                :max-height="600"
-                :multiple="true"
-                :options-limit="300"
-                :options="filter.options"
-                :preserve-search="true"
-                :searchable="true"
-                :show-no-results="false"
-                :hide-selected="true"
-                @input="handleChange"
-                @search-change="asyncFind"
-                @select="select"
-                label="name"
-                open-direction="bottom"
-                :placeholder="placeholder"
-                :noOptions="noOptions"
-                track-by="name"
-                v-model="value"
-            ></multiselect>
-            {{ meta }}
+            <multiselect :clear-on-select="true" :close-on-select="true" :dusk="filter.name + '-filter-select'"
+                :internal-search="false" :limit-text="limitText" :limit="3" :loading="isLoading" :max-height="600"
+                :multiple="true" :options-limit="300" :options="filter.options" :preserve-search="true"
+                :searchable="true" :show-no-results="false" :hide-selected="true" @input="handleChange"
+                @search-change="asyncFind" @select="select" label="name" open-direction="bottom"
+                :placeholder="placeholder" :noOptions="noOptions" track-by="name" v-model="value"></multiselect>
+
+            {{ filter }}
         </div>
     </div>
 </template>
@@ -77,7 +58,7 @@ export default {
         },
         asyncFind(query) {
             this.isLoading = true
-            Nova.request().post('/nova-vendor/spatie-tags-nova-filter/tags', { q: query }).then(response => {
+            Nova.request().post('/nova-vendor/spatie-tags-nova-filter/tags', { q: query, tag_type: this.filter.tag_type }).then(response => {
                 this.filter.options = response.data;
                 this.isLoading = false
             })
@@ -90,15 +71,12 @@ export default {
                 this.filterKey
             )
         },
-        meta() {
-            return this.$store.getters[`${this.resourceName}/getFilter`](
-                this
-            )
-        },
+
         value() {
-            return this.filter.currentValue
+            return this.filter ? this.filter.currentValue : null
         },
     }
 }
 </script>
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
+</style>
