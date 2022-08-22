@@ -14,7 +14,6 @@ class SpatieTagsNovaFilter extends Filter
      */
     public $component = 'spatie-tags-nova-filter';
 
-
     public function __construct($tag_type = null, $withAnyTags = true)
     {
         $this->withMeta([
@@ -44,11 +43,13 @@ class SpatieTagsNovaFilter extends Filter
             $tags = collect($value)->map(function ($tag) {
                 return $tag['name'];
             });
-            if ($this->meta['withAnyTags'])
+            if ($this->meta['withAnyTags']) {
                 $query->withAnyTags($tags, $this->meta['tag_type']);
-            else
+            } else {
                 $query->withAllTags($tags, $this->meta['tag_type']);
+            }
         }
+
         return $query;
     }
 
