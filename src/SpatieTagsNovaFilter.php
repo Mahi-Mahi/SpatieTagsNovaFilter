@@ -35,7 +35,7 @@ class SpatieTagsNovaFilter extends Filter
             $tags = collect($value)->map(function ($tag) {
                 return $tag['name'];
             });
-            $query->withAllTags($tags);
+            $query->withAnyTags($tags);
         }
 
         return $query;
