@@ -31,7 +31,12 @@ class MyResource extends Resource
     public function filters(Request $request)
     {
         return [
-            (new SpatieTagsNovaFilter)->label('Tags')
+            (new SpatieTagsNovaFilter)
+                ->label('Tags')
+                ->withMeta([
+                    'withAnyTags' => false,
+                    'tag_type' => null
+                ])
         ];
     }
 }
