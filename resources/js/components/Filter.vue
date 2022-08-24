@@ -9,8 +9,6 @@
                 :searchable="true" :show-no-results="false" :hide-selected="true" @input="handleChange"
                 @search-change="asyncFind" @select="select" label="name" open-direction="bottom"
                 :placeholder="placeholder" :noOptions="noOptions" track-by="name" v-model="value"></multiselect>
-
-            {{ filter }}
         </div>
     </div>
 </template>
@@ -46,7 +44,15 @@ export default {
             isLoading: false
         }
     },
-
+    mounted: function () {
+        console.log("mounted");
+        this.$nextTick(function () {
+            // Code that will run only after the
+            // entire view has been rendered
+            if (!this.isLoading)
+                this.asyncFind('');
+        })
+    },
     methods: {
         handleChange(value, id) {
             this.$store.commit(`${this.resourceName}/updateFilterState`, {
